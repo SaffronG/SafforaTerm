@@ -33,15 +33,15 @@ fn main() {
                             Err(_) => println!("Failed to create directory!"),
                         }
                     },
-                    // &"cd" => {
-                    //     let path_str = format!("{}/{}", current_dir.display(), cmd.get(1).unwrap());
-                    //     let new_path = Path::new(&path_str.as_str());
-                    //     if new_path.is_dir() {
-                    //         current_dir = new_path;
-                    //     } else {
-                    //         println!("Invalid directory!");
-                    //     }
-                    // },
+                    &"cd" => {
+                        let path_str = format!("{}/{}", current_dir.display(), cmd.get(1).unwrap());
+                        let new_path = Path::new(&path_str);
+                        if new_path.is_dir() {
+                            current_dir = Path::new(&path_str)
+                        } else {
+                            println!("Invalid directory!")
+                        }
+                    },
                     &"rmdir" => {
                         let path_str = format!("{}/{}",current_dir.display(),cmd.get(1).unwrap());
                         let new_path = Path::new(&path_str);
