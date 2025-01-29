@@ -23,7 +23,27 @@ fn main() {
                     &"ls" => {
                         let paths = fs::read_dir(current_dir.clone()).unwrap();
                         for path in paths {
-                            println!("> {}", path.unwrap().path().display());
+                            let path = path.unwrap().path();
+                            if path.is_dir() {
+                                print!("D ");
+                            } else {
+                                print!("F ");
+                            }
+                            let mut path_str = path.display().to_string();
+                            path_str.replace_range(0..current_dir.display().to_string().len(), "");
+                            println!("> ~\\{}", path_str);
+                        }
+                    },
+                    &"als" | &"la" => {
+                        let paths = fs::read_dir(current_dir.clone()).unwrap();
+                        for path in paths {
+                            let path = path.unwrap().path();
+                            if path.is_dir() {
+                                print!("D ");
+                            } else {
+                                print!("F ");
+                            }
+                            println!("> {}", path.display());
                         }
                     },
                     &"pwd" | &"dir" => println!("{}", current_dir.display()),
@@ -74,9 +94,26 @@ fn main() {
                         let mut line_no: i32 = 0;
                         for line in file.lines() {
                             line_no += 1;
-                            if line.contains(cmd.get(2).unwrap()) {
-                                println!("{}: {}", line_no, line);
+                            match cmd.get(2) {
+                                Some(result) => {
+                                    if line.contains(result) {
+                                        println!("{}: {}", line_no, line);
+                                    }
+                                }
+                                _ => println!("Failed to grep file!"),
                             }
+                        }
+                    },
+                    &"wc" | &"words" => {
+                        let path_str = format!("{}/{}",current_dir.display(),cmd.get(1).unwrap());
+                        let new_path = Path::new(&path_str);
+                        let mut file: String = String::new();
+                        match fs::File::open(new_path).unwrap().read_to_string(&mut file) {
+                            Ok(_) => {
+                                let words: Vec<&str> = file.split_whitespace().collect();
+                                println!("Word Count: {}", words.len());
+                            },
+                            Err(_) => println!("Failed to open file!"),
                         }
                     },
                     // Misc Commands
