@@ -5,13 +5,13 @@ SafforaOS Terminal Project
 - [x] ls command
 - [x] rmdir command
 - [x] mkdir command
+- [x] cd command
+- [x] mov command
+- [x] pwd
 
 > TODO
-- [ ] cd command
-- [ ] mov command
 - [ ] grep command
 - [ ] grep (regex)
-- [ ] pwd
 - [ ] edit (opens a custom text editor)
 - [ ] head
 - [ ] tail
