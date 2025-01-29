@@ -21,28 +21,37 @@ fn main() {
                     },
                     &"ls" => {
                         let paths = fs::read_dir(current_dir).unwrap();
-                        
                         for path in paths {
                             println!("> {}", path.unwrap().path().display());
                         }
                     },
                     &"mkdir" => {
-                        let path_str = format!("{}/{}",current_dir.display(),cmd.get(1).unwrap());
-                        let new_path = Path::new(&path_str);
-
+                        let path_str = format!("{}/{}", current_dir.display(), cmd.get(1).unwrap());
+                        let new_path = Path::new(path_str.as_str());
                         match fs::create_dir(new_path) {
                             Ok(_) => (),
                             Err(_) => println!("Failed to create directory!"),
                         }
                     },
-                    &"cd" => {
-
-                    },
+                    // &"cd" => {
+                    //     let path_str = format!("{}/{}", current_dir.display(), cmd.get(1).unwrap());
+                    //     let new_path = Path::new(&path_str.as_str());
+                    //     if new_path.is_dir() {
+                    //         current_dir = new_path;
+                    //     } else {
+                    //         println!("Invalid directory!");
+                    //     }
+                    // },
                     &"rmdir" => {
-
-                    }
+                        let path_str = format!("{}/{}",current_dir.display(),cmd.get(1).unwrap());
+                        let new_path = Path::new(&path_str);
+                        match fs::remove_dir(new_path) {
+                            Ok(_) => (),
+                            Err(_) => println!("Failed to remove directory!"),
+                        }
+                    },
                     &"exit" | &"Exit" => break 'exec_loop,
-                    _ => println!("Unsuported command!")
+                    _ => println!("Unsupported command!")
                 }
             },
             Err(_) => println!("Invalid input!")
