@@ -31,7 +31,7 @@ fn main() {
                             }
                             let mut path_str = path.display().to_string();
                             path_str.replace_range(0..current_dir.display().to_string().len(), "");
-                            println!("> ~\\{}", path_str);
+                            println!("> ~/{}", path_str);
                         }
                     },
                     &"als" | &"la" => {

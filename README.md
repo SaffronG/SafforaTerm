@@ -3,14 +3,19 @@ SafforaOS Terminal Project
 > Completed
 - [x] echo command
 - [x] ls command
+- [x] als command
 - [x] rmdir command
 - [x] mkdir command
 - [x] cd command
 - [x] mov command
-- [x] pwd
+- [x] pwd command
 - [x] grep command
 
 > TODO
+// general helper functions
+- [ ] help
+- [ ] clear
+
 // File Commands
 - [ ] head
 - [ ] tail
