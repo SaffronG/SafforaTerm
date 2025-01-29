@@ -3,7 +3,7 @@ use std::path::Path;
 use std::fs;
 
 fn main() {
-    let mut current_dir = Path::new("C:/");
+    let mut current_dir = Path::new("C:/").to_path_buf();
     'exec_loop: loop {
         print!("User$ ");
         io::stdout().flush().unwrap();
@@ -20,10 +20,13 @@ fn main() {
                         println!();
                     },
                     &"ls" => {
-                        let paths = fs::read_dir(current_dir).unwrap();
+                        let paths = fs::read_dir(current_dir.clone()).unwrap();
                         for path in paths {
                             println!("> {}", path.unwrap().path().display());
                         }
+                    },
+                    &"mov" => {
+                        unimplemented!("Unimplemented code error!");              
                     },
                     &"mkdir" => {
                         let path_str = format!("{}/{}", current_dir.display(), cmd.get(1).unwrap());
@@ -34,10 +37,10 @@ fn main() {
                         }
                     },
                     &"cd" => {
-                        let path_str = format!("{}/{}", current_dir.display(), cmd.get(1).unwrap());
+                        let path_str = format!("{}/{}", current_dir.clone().display(), cmd.get(1).unwrap());
                         let new_path = Path::new(&path_str);
                         if new_path.is_dir() {
-                            current_dir = Path::new(&path_str)
+                            current_dir = new_path.to_path_buf();
                         } else {
                             println!("Invalid directory!")
                         }
