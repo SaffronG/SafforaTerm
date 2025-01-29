@@ -13,6 +13,7 @@ fn main() {
                 let cmd: Vec<&str> = cmd_buff.trim().split_whitespace().collect();
 
                 match cmd.get(0).unwrap() {
+                    &"clear" | &"cls" => print!("{esc}[2J{esc}[1;1H", esc = 27 as char),
                     &"echo" | &"Echo" => {
                         for word in cmd.iter().skip(1) {
                             print!("{} ", word);

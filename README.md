@@ -10,11 +10,11 @@ SafforaOS Terminal Project
 - [x] mov command
 - [x] pwd command
 - [x] grep command
+- [x] clear
 
 > TODO
 // general helper functions
 - [ ] help
-- [ ] clear
 
 // File Commands
 - [ ] head
