@@ -1,4 +1,4 @@
-use std::io::{self, Write};
+use std::io::{self, Read, Write};
 use std::path::Path;
 use std::fs;
 
@@ -19,6 +19,7 @@ fn main() {
                         }
                         println!();
                     },
+                    // Directory Commands
                     &"ls" => {
                         let paths = fs::read_dir(current_dir.clone()).unwrap();
                         for path in paths {
@@ -61,6 +62,24 @@ fn main() {
                             Err(_) => println!("Failed to remove directory!"),
                         }
                     },
+                    // File Commands
+                    &"grep" => {
+                        let path_str = format!("{}/{}",current_dir.display(),cmd.get(1).unwrap());
+                        let new_path = Path::new(&path_str);
+                        let mut file: String = String::new();
+                        match fs::File::open(new_path).unwrap().read_to_string(&mut file) {
+                            Ok(_) => (),
+                            Err(_) => println!("Failed to open file!"),
+                        }
+                        let mut line_no: i32 = 0;
+                        for line in file.lines() {
+                            line_no += 1;
+                            if line.contains(cmd.get(2).unwrap()) {
+                                println!("{}: {}", line_no, line);
+                            }
+                        }
+                    },
+                    // Misc Commands
                     &"exit" | &"Exit" => break 'exec_loop,
                     _ => println!("Unsupported command!")
                 }
