@@ -4,6 +4,7 @@ use std::fs;
 
 fn main() {
     let mut current_dir = Path::new("C:/").to_path_buf();
+    // let mut cmd_buff: Vec<String> = Vec::new(); // for implementing history functionality
     'exec_loop: loop {
         print!("User$ ");
         io::stdout().flush().unwrap();
@@ -13,7 +14,9 @@ fn main() {
                 let cmd: Vec<&str> = cmd_buff.trim().split_whitespace().collect();
 
                 match cmd.get(0).unwrap() {
+                    // Helper Functions
                     &"clear" | &"cls" => print!("{esc}[2J{esc}[1;1H", esc = 27 as char),
+                    &"help" => println!("\nCommands: clear: clears the screen,\n help: shows this menu,\n echo: prints the input string,\n ls: displays the relative path of the current directory,\n als: displays the actual path of the current directory,\n pwd,\n mov or rname: renames a file or directory or moves a file or directory,\n mkdir: creates a new folder,\n cd: changes directory,\n rmdir: removes a directiory,\n grep: finds a line containing the input string,\n wc or words: return the wordcount of the file,\n exit: exit the terminal\n"),
                     &"echo" | &"Echo" => {
                         for word in cmd.iter().skip(1) {
                             print!("{} ", word);
