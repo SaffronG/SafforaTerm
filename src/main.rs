@@ -25,8 +25,16 @@ fn main() {
                             println!("> {}", path.unwrap().path().display());
                         }
                     },
-                    &"mov" => {
-                        unimplemented!("Unimplemented code error!");              
+                    &"pwd" | &"dir" => println!("{}", current_dir.display()),
+                    &"mov" | &"rname" => {
+                        let src_str = format!("{}/{}", current_dir.display(), cmd.get(1).unwrap());
+                        let dest_str = format!("{}/{}", current_dir.display(), cmd.get(2).unwrap());
+                        let src_path = Path::new(&src_str);
+                        let dest_path = Path::new(&dest_str);
+                        match fs::rename(src_path, dest_path) {
+                            Ok(_) => (),
+                            Err(_) => println!("Failed to move file!"),
+                        }
                     },
                     &"mkdir" => {
                         let path_str = format!("{}/{}", current_dir.display(), cmd.get(1).unwrap());
