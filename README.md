@@ -11,11 +11,9 @@ SafforaOS Terminal Project
 - [x] pwd command
 - [x] grep command
 - [x] clear
+- [x] help
 
 > TODO
-// general helper functions
-- [ ] help
-
 // File Commands
 - [ ] head
 - [ ] tail
