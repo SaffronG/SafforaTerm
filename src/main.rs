@@ -4,7 +4,6 @@ use std::fs;
 
 fn main() {
     let mut current_dir = Path::new("C:/").to_path_buf();
-    // let mut cmd_buff: Vec<String> = Vec::new(); // for implementing history functionality
     'exec_loop: loop {
         print!("User$ ");
         io::stdout().flush().unwrap();
@@ -35,7 +34,7 @@ fn main() {
                             }
                             let mut path_str = path.display().to_string();
                             path_str.replace_range(0..current_dir.display().to_string().len(), "");
-                            println!("> ~/{}", path_str);
+                            println!("> ~{}", path_str);
                         }
                     },
                     &"als" | &"la" => {
