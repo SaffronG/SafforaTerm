@@ -12,21 +12,21 @@ SafforaOS Terminal Project
 - [x] grep command
 - [x] clear
 - [x] help
+- [x] cat
+- [x] wc
+- [x] head
+- [x] tail
+- [x] cp
+- [x] cut
+- [x] sort
+- [x] df
 
 > TODO
-// File Commands
-- [ ] head
-- [ ] tail
-- [ ] cat
-- [ ] cp
-- [ ] wc
-- [ ] cut
-- [ ] sort
-- [ ] df
-- [ ] grep (regex)
-
 // Text Editor
 - [ ] edit (opens a custom text editor)
+
+// Misc
+- [ ] grep (regex)
 
 // Manual Features
 - [ ] man (used to show the manual of any linux command)

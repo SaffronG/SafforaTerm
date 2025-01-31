@@ -119,7 +119,85 @@ fn main() {
                             Err(_) => println!("Failed to open file!"),
                         }
                     },
+                    &"cat" => {
+                        let path_str = format!("{}/{}",current_dir.display(),cmd.get(1).unwrap());
+                        let new_path = Path::new(&path_str);
+                        let mut file: String = String::new();
+                        match fs::File::open(new_path).unwrap().read_to_string(&mut file) {
+                            Ok(_) => println!("{}", file),
+                            Err(_) => println!("Failed to open file!"),
+                        }
+                    },
+                    &"head" => {
+                        let path_str = format!("{}/{}",current_dir.display(),cmd.get(1).unwrap());
+                        let new_path = Path::new(&path_str);
+                        let line_count = match cmd.get(2) {
+                            Some(result) => result.parse::<usize>().unwrap(),
+                            _ => 10,
+                        };
+                        let mut file: String = String::new();
+                        match fs::File::open(new_path).unwrap().read_to_string(&mut file) {
+                            Ok(_) => {
+                                for line in file.lines().take(line_count) {
+                                    println!("{}", line);
+                                }
+                            },
+                            Err(_) => println!("Failed to open file!"),
+                        }
+                    },
+                    &"tail" => {
+                        let path_str = format!("{}/{}",current_dir.display(),cmd.get(1).unwrap());
+                        let new_path = Path::new(&path_str);
+                        let line_count = match cmd.get(2) {
+                            Some(result) => result.parse::<usize>().unwrap(),
+                            _ => 10,
+                        };
+                        let mut file: String = String::new();
+                        match fs::File::open(new_path).unwrap().read_to_string(&mut file) {
+                            Ok(_) => {
+                                for line in file.lines().rev().take(line_count) {
+                                    println!("{}", line);
+                                }
+                            },
+                            Err(_) => println!("Failed to open file!"),                            
+                        }
+                    },
+                    &"cp" | &"copy" => {
+                        let src_str = format!("{}/{}", current_dir.display(), cmd.get(1).unwrap());
+                        let dest_str = format!("{}/{}", current_dir.display(), cmd.get(2).unwrap());
+                        let src_path = Path::new(&src_str);
+                        let dest_path = Path::new(&dest_str);
+                        match fs::copy(src_path, dest_path) {
+                            Ok(_) => (),
+                            Err(_) => println!("Failed to copy file!"),
+                        }
+                    },
+                    &"sort" => {
+                        let path_str = format!("{}/{}",current_dir.display(),cmd.get(1).unwrap());
+                        let new_path = Path::new(&path_str);
+                        let mut file: String = String::new();
+                        match fs::File::open(new_path).unwrap().read_to_string(&mut file) {
+                            Ok(_) => {
+                                let mut lines: Vec<&str> = file.lines().collect();
+                                lines.sort();
+                                for line in lines {
+                                    println!("{}", line);
+                                }
+                            },
+                            Err(_) => println!("Failed to open file!"),
+                        }
+                    },
                     // Misc Commands
+                    &"df" => {
+                        let path_str = format!("{}/{}",current_dir.display(),cmd.get(1).unwrap());
+                        let new_path = Path::new(&path_str);
+                        match fs::metadata(new_path) {
+                            Ok(metadata) => {
+                                println!("File Size: {} bytes", metadata.len());
+                            },
+                            Err(_) => println!("Failed to get file size!"),
+                        }
+                    },
                     &"exit" | &"Exit" => break 'exec_loop,
                     _ => println!("Unsupported command!")
                 }
