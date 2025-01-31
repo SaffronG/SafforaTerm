@@ -3,24 +3,33 @@ SafforaOS Terminal Project
 > Completed
 - [x] echo command
 - [x] ls command
+- [x] als command
 - [x] rmdir command
 - [x] mkdir command
 - [x] cd command
 - [x] mov command
-- [x] pwd
+- [x] pwd command
+- [x] grep command
+- [x] clear
 
 > TODO
-- [ ] grep command
-- [ ] grep (regex)
-- [ ] edit (opens a custom text editor)
+// general helper functions
+- [ ] help
+
+// File Commands
 - [ ] head
 - [ ] tail
 - [ ] cat
 - [ ] cp
-- [ ] sort
 - [ ] wc
 - [ ] cut
-- [ ] du
+- [ ] sort
+- [ ] df
+- [ ] grep (regex)
+
+// Text Editor
+- [ ] edit (opens a custom text editor)
+
+// Manual Features
 - [ ] man (used to show the manual of any linux command)
 - [ ] rman (used to show the manual of and std::lib rust command)
-- [ ] df
