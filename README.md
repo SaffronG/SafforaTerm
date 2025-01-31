@@ -1,3 +1,5 @@
+Author (Kenneth Chase Harmer) - 1/28/2025
+
 SafforaOS Terminal Project
 
 > Completed
